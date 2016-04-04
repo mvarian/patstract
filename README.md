@@ -1,7 +1,20 @@
 # Patstract 
 **Pattern-Based File Extraction Script**
 
-This script will extract any files matching the pattern to and move them to the destination path, preserving file structure and permissions.
+This script will extract any files matching the pattern to and move them to the destination path, preserving relative file structure and permissions.
+
+## Example
+  
+If we have Windows shortcut files ending in .lnk in the following locations:  
+
+`/source-dir/foo.lnk`  
+`/source-dir/directory/subdirectory/bar.lnk`  
+
+Executing patstract with destination as /dest-dir and pattern *lnk will remove these two linked files from the source-dir, and place them in the destination directory as:  
+
+`/dest-dir/foo.lnk`  
+`/dest-dir/directory/subdirectory/bar.lnk`  
+
 
 ## License
 
