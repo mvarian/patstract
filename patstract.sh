@@ -37,7 +37,6 @@ else
 	echo -e "\n"
 	export -f movematch
 	find $SOURCE -name $PATTERN -exec bash -c 'movematch "$0" "$1" "$2"' {} $SOURCE $DEST $1 \;
-#	rsync -lptgoDrv --remove-source-files --include=$PATTERN --include="$SOURCE/*/" --exclude='*' $SOURCE $DEST
 fi
 
 echo -e "\n"
