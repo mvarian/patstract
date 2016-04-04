@@ -9,7 +9,7 @@
 ############### BEGIN CONFIGURATION ###############
 
 ## Set to 1 to dry run and only output results without taking action, set to 0 to run for real
-DRYRUN=0
+DRYRUN=1
 
 ## Change these for your needs
 SOURCE='/source-dir'
