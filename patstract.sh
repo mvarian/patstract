@@ -27,8 +27,8 @@ PATTERN='*.lnk'
 function movematch () {
 	new=`echo $0 | sed "s|$SOURCE|$DEST|g"`
 	newdir=$(dirname "${new}")
-	mkdir -p $newdir
-	rsync -lptgoDvz --remove-source-files $0 $new
+	mkdir -p "$newdir"
+	rsync -lptgoDvz --remove-source-files "$0" "$new"
 }
 
 
