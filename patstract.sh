@@ -11,6 +11,11 @@
 ## Set to 1 to dry run and only output results without taking action, set to 0 to run for real
 DRYRUN=1
 
+## Set to 1 to exclude use of -exec in the find command, as that may not be supported on all systems
+## When in compatibility mode, matches in the root of the source path may not be included
+COMPATIBILTY=0
+
+
 ## Change these for your needs
 SOURCE="/source-dir/"
 DEST="/dest-dir"
@@ -23,7 +28,7 @@ function movematch () {
 	new=`echo $0 | sed "s|$SOURCE|$DEST|g"`
 	newdir=$(dirname "${new}")
 	mkdir -p $newdir
-	rsync -lptgoDvz --remove-source-files $3 $new
+	rsync -lptgoDvz --remove-source-files $0 $new
 }
 
 
@@ -38,7 +43,12 @@ else
 	export -f movematch
 	export SOURCE
 	export DEST
-	find "$SOURCE" -name "$PATTERN" -print | xargs bash -c 'movematch "$0"'
+	if [ $COMPATIBILTY == 1 ]
+	then
+		find "$SOURCE" -name "$PATTERN" -print | xargs bash -c 'movematch "$0"'
+	else
+		find $SOURCE -name $PATTERN -exec bash -c 'movematch "$0"' {} \;
+	fi
 fi
 
 echo -e "\n"
