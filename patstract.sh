@@ -12,8 +12,8 @@
 DRYRUN=1
 
 ## Change these for your needs
-SOURCE='/source-dir'
-DEST='/dest-dir'
+SOURCE="/source-dir/"
+DEST="/dest-dir"
 PATTERN='*.lnk'
 
 ############### END CONFIGURATION ###############
@@ -31,12 +31,12 @@ if [ $DRYRUN == 1 ]
 then
 	clear
 	echo -e "************DRY RUN************\n"
-	find $SOURCE -name $PATTERN -print
+	find "$SOURCE" -name $PATTERN -print
 else
 	clear
 	echo -e "\n"
 	export -f movematch
-	find $SOURCE -name $PATTERN -print | xargs bash -c 'movematch "$0" "$1" "$2"' $SOURCE $DEST
+	find "$SOURCE" -name $PATTERN -print | xargs bash -c 'movematch "$0" "$1" "$2"' $SOURCE $DEST
 fi
 
 echo -e "\n"
