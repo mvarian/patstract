@@ -20,7 +20,7 @@ PATTERN='*.lnk'
 
 
 function movematch () {
-	new=`echo $3 | sed "s|$1|$2|g"`
+	new=`echo $0 | sed "s|$SOURCE|$DEST|g"`
 	newdir=$(dirname "${new}")
 	mkdir -p $newdir
 	rsync -lptgoDvz --remove-source-files $3 $new
@@ -31,12 +31,14 @@ if [ $DRYRUN == 1 ]
 then
 	clear
 	echo -e "************DRY RUN************\n"
-	find "$SOURCE" -name $PATTERN -print
+	find "$SOURCE" -name "$PATTERN" -print
 else
 	clear
 	echo -e "\n"
 	export -f movematch
-	find "$SOURCE" -name $PATTERN -print | xargs bash -c 'movematch "$0" "$1" "$2"' $SOURCE $DEST
+	export SOURCE
+	export DEST
+	find "$SOURCE" -name "$PATTERN" -print | xargs bash -c 'movematch "$0"'
 fi
 
 echo -e "\n"
