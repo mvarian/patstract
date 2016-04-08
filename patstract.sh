@@ -47,7 +47,7 @@ else
 	then
 		find "$SOURCE" -name "$PATTERN" -print | xargs bash -c 'movematch "$0"'
 	else
-		find $SOURCE -name $PATTERN -exec bash -c 'movematch "$0"' {} \;
+		find "$SOURCE" -name "$PATTERN" -exec bash -c 'movematch "$0"' {} \;
 	fi
 fi
 
